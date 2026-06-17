@@ -1,0 +1,76 @@
+import { ImageResponse } from "next/og";
+import { site } from "@/lib/site";
+
+export const alt = `${site.name} — Software Engineer`;
+export const size = { width: 1200, height: 630 };
+export const contentType = "image/png";
+
+export default function OgImage() {
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          padding: "80px",
+          background: "#07070b",
+          color: "#e9e9f1",
+          fontFamily: "sans-serif",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            fontSize: 26,
+            color: "#a78bfa",
+            letterSpacing: 1,
+          }}
+        >
+          {site.role}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            fontSize: 88,
+            fontWeight: 700,
+            marginTop: 20,
+            lineHeight: 1.05,
+          }}
+        >
+          {site.name}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            fontSize: 30,
+            color: "#9a9ab0",
+            marginTop: 24,
+            maxWidth: 920,
+          }}
+        >
+          Machine learning, NLP, and full-stack development — from semantic
+          search to production-grade APIs.
+        </div>
+        <div style={{ display: "flex", marginTop: 44, fontSize: 24, color: "#22d3ee" }}>
+          github.com/joeln45
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: 12,
+            display: "flex",
+            background: "linear-gradient(90deg, #8b5cf6, #22d3ee)",
+          }}
+        />
+      </div>
+    ),
+    { ...size }
+  );
+}

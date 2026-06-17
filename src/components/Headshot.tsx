@@ -31,7 +31,7 @@ export default function Headshot() {
           </div>
         ) : (
           <Image
-            src="/headshot.jpg"
+            src="/headshot.png"
             alt={site.name}
             fill
             sizes="256px"

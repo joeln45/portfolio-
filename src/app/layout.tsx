@@ -25,10 +25,48 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? site.url;
+
+const description =
+  "Recent BSc (Hons) Software Engineering graduate building across machine learning, NLP, and full-stack development — from semantic search and ML classifiers to production-grade APIs and mobile apps.";
+
 export const metadata: Metadata = {
-  title: `${site.name} — Software Engineer (ML/AI & Full-Stack)`,
-  description:
-    "Recent BSc (Hons) Software Engineering graduate building across machine learning, NLP, and full-stack development — from semantic search and ML classifiers to production-grade APIs and mobile apps.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: `${site.name} — Software Engineer (ML/AI & Full-Stack)`,
+    template: `%s · ${site.shortName}`,
+  },
+  description,
+  keywords: [
+    "Joel Nirmal",
+    "Joel Nirmal Oommen",
+    "Software Engineer",
+    "Machine Learning Engineer",
+    "AI",
+    "Fintech",
+    "Full-Stack Developer",
+    "Next.js",
+    "Python",
+    "Java",
+    "UAE",
+  ],
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    siteName: site.name,
+    title: `${site.name} — Software Engineer`,
+    description,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.name} — Software Engineer`,
+    description,
+  },
+  robots: { index: true, follow: true },
+  alternates: { canonical: "/" },
 };
 
 export default function RootLayout({

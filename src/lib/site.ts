@@ -8,6 +8,8 @@ export const site = {
   initials: "JN",
   role: "Software Engineer — ML/AI & Full-Stack",
   location: "Ajman, UAE",
+  // Update this to your real domain once Vercel is connected.
+  url: "https://joel-nirmal.vercel.app",
   email: "joelnirmal97@gmail.com",
   // Drop your CV here as /public/Joel-Nirmal-CV.pdf
   resume: "/Joel-Nirmal-CV.pdf",
