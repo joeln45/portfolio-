@@ -1,5 +1,6 @@
 import Reveal from "@/components/Reveal";
 import CountUp from "@/components/CountUp";
+import Headshot from "@/components/Headshot";
 import { site } from "@/lib/site";
 
 const stats = [
@@ -52,26 +53,7 @@ export default function About() {
           </Reveal>
 
           <Reveal delay={0.15} className="flex justify-center lg:justify-end">
-            {/* TODO: replace this placeholder with
-                <Image src="/headshot.jpg" alt="Joel Nirmal" width={256} height={320} .../>
-                once you drop your photo into /public. */}
-            <div className="relative">
-              <div
-                className="absolute -inset-3 rounded-3xl opacity-40 blur-2xl"
-                style={{
-                  background:
-                    "linear-gradient(135deg, var(--color-accent), var(--color-accent-2))",
-                }}
-              />
-              <div className="relative grid h-80 w-64 place-items-center rounded-3xl border border-border bg-surface">
-                <span className="font-display text-7xl font-bold text-gradient">
-                  {site.initials}
-                </span>
-                <span className="absolute bottom-4 font-mono text-xs text-muted">
-                  add /headshot.jpg
-                </span>
-              </div>
-            </div>
+            <Headshot />
           </Reveal>
         </div>
 

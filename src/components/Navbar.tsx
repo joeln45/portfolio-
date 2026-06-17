@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -16,11 +17,29 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const sections = navLinks
+      .map((l) => document.getElementById(l.href.slice(1)))
+      .filter((el): el is HTMLElement => el !== null);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        }
+      },
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled ? "glass" : "bg-transparent border-b border-transparent"
+        scrolled ? "glass" : "border-b border-transparent bg-transparent"
       )}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
@@ -39,7 +58,12 @@ export default function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-sm text-muted transition-colors hover:text-foreground"
+                className={cn(
+                  "text-sm transition-colors hover:text-foreground",
+                  active === link.href.slice(1)
+                    ? "text-foreground"
+                    : "text-muted"
+                )}
               >
                 {link.label}
               </a>
@@ -47,7 +71,10 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <a href="#contact" className="hidden md:inline-flex btn-primary !px-5 !py-2.5">
+        <a
+          href="#contact"
+          className="btn-primary hidden !px-5 !py-2.5 md:inline-flex"
+        >
           Get in touch
         </a>
 

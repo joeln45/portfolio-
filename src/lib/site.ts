@@ -11,6 +11,7 @@ export const site = {
   email: "joelnirmal97@gmail.com",
   // Drop your CV here as /public/Joel-Nirmal-CV.pdf
   resume: "/Joel-Nirmal-CV.pdf",
+  formspree: "https://formspree.io/f/mwvjjkkg",
   socials: {
     github: "https://github.com/joeln45",
     linkedin: "https://www.linkedin.com/in/joel-nirmal-oommen",
