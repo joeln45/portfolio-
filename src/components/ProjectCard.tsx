@@ -1,6 +1,7 @@
 "use client";
 
 import type { MouseEvent } from "react";
+import { useReducedMotion } from "motion/react";
 import { ExternalLink, Lock } from "lucide-react";
 import { GithubIcon } from "@/components/icons";
 import type { Project, ProjectLink } from "@/lib/projects";
@@ -40,16 +41,29 @@ export function ProjectCard({
   featured?: boolean;
 }) {
   const Icon = project.icon;
+  const reduce = useReducedMotion();
 
   function handleMove(e: MouseEvent<HTMLElement>) {
     const rect = e.currentTarget.getBoundingClientRect();
     e.currentTarget.style.setProperty("--mx", `${e.clientX - rect.left}px`);
     e.currentTarget.style.setProperty("--my", `${e.clientY - rect.top}px`);
+    if (reduce) return;
+    // Ghost icon drifts ~7px opposite the cursor for parallax depth.
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    e.currentTarget.style.setProperty("--icon-x", `${-px * 14}px`);
+    e.currentTarget.style.setProperty("--icon-y", `${-py * 14}px`);
+  }
+
+  function handleLeave(e: MouseEvent<HTMLElement>) {
+    e.currentTarget.style.setProperty("--icon-x", "0px");
+    e.currentTarget.style.setProperty("--icon-y", "0px");
   }
 
   return (
     <article
       onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
       className="card-lift group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface"
     >
       {/* Art-directed cover: warm wash + ghosted icon watermark */}
@@ -60,11 +74,17 @@ export function ProjectCard({
         }}
       >
         <div aria-hidden className="dot-grid absolute inset-0 opacity-20" />
-        <Icon
+        <div
           aria-hidden
-          size={featured ? 150 : 130}
-          className="absolute -bottom-7 -right-4 text-white/15 transition-transform duration-500 ease-out group-hover:-rotate-3 group-hover:scale-105"
-        />
+          className="pointer-events-none absolute inset-0 transition-transform duration-300 ease-out"
+          style={{ transform: "translate3d(var(--icon-x, 0px), var(--icon-y, 0px), 0)" }}
+        >
+          <Icon
+            aria-hidden
+            size={featured ? 150 : 130}
+            className="absolute -bottom-7 -right-4 text-white/15 transition-transform duration-500 ease-out group-hover:-rotate-3 group-hover:scale-105"
+          />
+        </div>
         <span className="absolute bottom-3 left-4 font-mono text-xs text-white/90">
           {project.category}
         </span>
