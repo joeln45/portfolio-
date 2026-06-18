@@ -7,15 +7,15 @@
 /* Warm "paper & ink" palette + clay accent (inspired by breedlove.xyz)*/
 /* ------------------------------------------------------------------ */
 @theme {
-  --color-bg: #faf8f4;
-  --color-bg-soft: #f4efe7;
-  --color-surface: #f1ece3;
-  --color-border: #e4ded2;
-  --color-foreground: #1c1917;
-  --color-muted: #6b6157;
+  --color-bg: #faf7f2;
+  --color-bg-soft: #f3ede2;
+  --color-surface: #ffffff;
+  --color-border: #e6ddcd;
+  --color-foreground: #1a1613;
+  --color-muted: #5f564b;
 
   --color-accent: #c2410c;
-  --color-accent-soft: #d4774a;
+  --color-accent-soft: #c14e1f;
   --color-accent-2: #b45309;
   --color-on-accent: #ffffff;
 
