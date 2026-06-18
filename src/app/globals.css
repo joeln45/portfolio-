@@ -1,25 +1,43 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ */
-/* Design tokens (Tailwind v4 @theme → generates utilities)            */
+/* Design tokens — light is the @theme default; [data-theme="dark"]    */
+/* overrides the same CSS variables, so every Tailwind utility and     */
+/* component class below switches theme automatically.                 */
+/* Warm "paper & ink" palette + clay accent (inspired by breedlove.xyz)*/
 /* ------------------------------------------------------------------ */
 @theme {
-  --color-bg: #07070b;
-  --color-bg-soft: #0b0b13;
-  --color-surface: #11111c;
-  --color-border: #1d1d2c;
-  --color-foreground: #e9e9f1;
-  --color-muted: #9a9ab0;
+  --color-bg: #faf8f4;
+  --color-bg-soft: #f4efe7;
+  --color-surface: #f1ece3;
+  --color-border: #e4ded2;
+  --color-foreground: #1c1917;
+  --color-muted: #6b6157;
 
-  --color-accent: #8b5cf6;
-  --color-accent-soft: #a78bfa;
-  --color-accent-2: #22d3ee;
+  --color-accent: #c2410c;
+  --color-accent-soft: #d4774a;
+  --color-accent-2: #b45309;
+  --color-on-accent: #ffffff;
 
   --font-sans: var(--font-hanken), ui-sans-serif, system-ui, -apple-system,
     sans-serif;
   --font-display: var(--font-bricolage), var(--font-hanken), ui-sans-serif,
     sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
+}
+
+[data-theme="dark"] {
+  --color-bg: #0e0c0b;
+  --color-bg-soft: #15110e;
+  --color-surface: #1a1613;
+  --color-border: #2a2420;
+  --color-foreground: #ece6dd;
+  --color-muted: #9b9085;
+
+  --color-accent: #e0875a;
+  --color-accent-soft: #e8a07a;
+  --color-accent-2: #d4774a;
+  --color-on-accent: #16110d;
 }
 
 /* ------------------------------------------------------------------ */
@@ -38,11 +56,11 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   ::selection {
-    background: color-mix(in oklab, var(--color-accent) 35%, transparent);
-    color: #fff;
+    background: color-mix(in oklab, var(--color-accent) 30%, transparent);
   }
 
   :focus-visible {
@@ -63,7 +81,7 @@
     border: 2px solid var(--color-bg);
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #2a2a3d;
+    background: color-mix(in oklab, var(--color-foreground) 25%, var(--color-border));
   }
 }
 
@@ -73,7 +91,7 @@
 .text-gradient {
   background-image: linear-gradient(
     120deg,
-    var(--color-accent-soft),
+    var(--color-accent),
     var(--color-accent-2)
   );
   -webkit-background-clip: text;
@@ -82,10 +100,10 @@
 }
 
 .glass {
-  background: rgba(17, 17, 28, 0.55);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: color-mix(in oklab, var(--color-bg-soft) 72%, transparent);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .btn-primary {
@@ -97,18 +115,16 @@
   padding: 0.8rem 1.5rem;
   font-weight: 600;
   font-size: 0.95rem;
-  color: #08080d;
-  background-image: linear-gradient(
-    135deg,
-    var(--color-accent-soft),
-    var(--color-accent-2)
-  );
-  box-shadow: 0 10px 34px -10px color-mix(in oklab, var(--color-accent) 70%, transparent);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  color: var(--color-on-accent);
+  background-color: var(--color-accent);
+  box-shadow: 0 10px 30px -12px color-mix(in oklab, var(--color-accent) 70%, transparent);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease,
+    background-color 0.2s ease;
 }
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 44px -10px color-mix(in oklab, var(--color-accent) 80%, transparent);
+  background-color: color-mix(in oklab, var(--color-accent) 88%, var(--color-foreground));
+  box-shadow: 0 16px 40px -12px color-mix(in oklab, var(--color-accent) 80%, transparent);
 }
 
 .btn-ghost {
@@ -121,14 +137,14 @@
   font-weight: 600;
   font-size: 0.95rem;
   color: var(--color-foreground);
-  background: rgba(255, 255, 255, 0.03);
+  background: color-mix(in oklab, var(--color-foreground) 3%, transparent);
   border: 1px solid var(--color-border);
   transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 .btn-ghost:hover {
   transform: translateY(-2px);
   border-color: color-mix(in oklab, var(--color-accent) 50%, var(--color-border));
-  background: rgba(255, 255, 255, 0.05);
+  background: color-mix(in oklab, var(--color-foreground) 6%, transparent);
 }
 
 .icon-link {
@@ -140,7 +156,7 @@
   border-radius: 9999px;
   color: var(--color-muted);
   border: 1px solid var(--color-border);
-  background: rgba(255, 255, 255, 0.02);
+  background: color-mix(in oklab, var(--color-foreground) 2%, transparent);
   transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 .icon-link:hover {
@@ -149,35 +165,38 @@
   transform: translateY(-2px);
 }
 
-/* Ambient hero glows */
+/* Ambient hero glow — subtle warm radial */
 .blob {
   position: absolute;
   border-radius: 9999px;
   filter: blur(90px);
-  opacity: 0.32;
+  opacity: 0.18;
   pointer-events: none;
 }
+[data-theme="dark"] .blob {
+  opacity: 0.22;
+}
 .hero-blob-1 {
-  width: 36rem;
-  height: 36rem;
-  left: -9rem;
-  top: -7rem;
+  width: 34rem;
+  height: 34rem;
+  left: -10rem;
+  top: -8rem;
   background: radial-gradient(circle, var(--color-accent), transparent 70%);
-  animation: float-slow 16s ease-in-out infinite;
+  animation: float-slow 18s ease-in-out infinite;
 }
 .hero-blob-2 {
-  width: 30rem;
-  height: 30rem;
-  right: -7rem;
-  top: 8rem;
-  background: radial-gradient(circle, var(--color-accent-2), transparent 70%);
-  animation: float-slow 20s ease-in-out infinite reverse;
+  width: 26rem;
+  height: 26rem;
+  right: -8rem;
+  top: 10rem;
+  background: radial-gradient(circle, var(--color-accent-soft), transparent 70%);
+  animation: float-slow 22s ease-in-out infinite reverse;
 }
 
-/* Faint dot grid overlay */
+/* Faint dot grid overlay (adapts to theme via foreground color) */
 .dot-grid {
   background-image: radial-gradient(
-    rgba(255, 255, 255, 0.05) 1px,
+    color-mix(in oklab, var(--color-foreground) 7%, transparent) 1px,
     transparent 1px
   );
   background-size: 26px 26px;

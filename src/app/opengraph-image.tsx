@@ -17,8 +17,8 @@ export default function OgImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "80px",
-          background: "#07070b",
-          color: "#e9e9f1",
+          background: "#0e0c0b",
+          color: "#ece6dd",
           fontFamily: "sans-serif",
         }}
       >
@@ -26,7 +26,7 @@ export default function OgImage() {
           style={{
             display: "flex",
             fontSize: 26,
-            color: "#a78bfa",
+            color: "#e0875a",
             letterSpacing: 1,
           }}
         >
@@ -47,7 +47,7 @@ export default function OgImage() {
           style={{
             display: "flex",
             fontSize: 30,
-            color: "#9a9ab0",
+            color: "#9b9085",
             marginTop: 24,
             maxWidth: 920,
           }}
@@ -55,7 +55,7 @@ export default function OgImage() {
           Machine learning, NLP, and full-stack development — from semantic
           search to production-grade APIs.
         </div>
-        <div style={{ display: "flex", marginTop: 44, fontSize: 24, color: "#22d3ee" }}>
+        <div style={{ display: "flex", marginTop: 44, fontSize: 24, color: "#e0875a" }}>
           github.com/joeln45
         </div>
         <div
@@ -66,7 +66,7 @@ export default function OgImage() {
             right: 0,
             height: 12,
             display: "flex",
-            background: "linear-gradient(90deg, #8b5cf6, #22d3ee)",
+            background: "linear-gradient(90deg, #c2410c, #e0875a)",
           }}
         />
       </div>

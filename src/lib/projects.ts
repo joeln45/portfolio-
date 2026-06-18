@@ -37,7 +37,7 @@ export const featuredProjects: Project[] = [
       "TF-IDF + cosine-similarity search across the BBC News and UCI News Aggregator datasets, with Hugging Face Transformers for summarization.",
     tags: ["Python", "scikit-learn", "Hugging Face", "TF-IDF", "Streamlit"],
     links: [{ type: "private", label: "Private — available on request" }],
-    gradient: ["#8b5cf6", "#22d3ee"],
+    gradient: ["#c2410c", "#e0875a"],
   },
   {
     title: "Amazon Bestsellers Analysis",
@@ -55,7 +55,7 @@ export const featuredProjects: Project[] = [
         label: "Source",
       },
     ],
-    gradient: ["#22d3ee", "#8b5cf6"],
+    gradient: ["#e0875a", "#c2410c"],
   },
   {
     title: "Order Management System",
@@ -73,7 +73,7 @@ export const featuredProjects: Project[] = [
         label: "Source",
       },
     ],
-    gradient: ["#a78bfa", "#22d3ee"],
+    gradient: ["#d4774a", "#e0875a"],
   },
   {
     title: "Distributed Mutual Exclusion",
@@ -91,7 +91,7 @@ export const featuredProjects: Project[] = [
         label: "Source",
       },
     ],
-    gradient: ["#8b5cf6", "#a78bfa"],
+    gradient: ["#c2410c", "#d4774a"],
   },
   {
     title: "Middle East Pearl Diving",
@@ -114,7 +114,7 @@ export const featuredProjects: Project[] = [
         label: "Source",
       },
     ],
-    gradient: ["#22d3ee", "#a78bfa"],
+    gradient: ["#e0875a", "#d4774a"],
   },
 ];
 
@@ -133,7 +133,7 @@ export const moreProjects: Project[] = [
         label: "Source",
       },
     ],
-    gradient: ["#a78bfa", "#22d3ee"],
+    gradient: ["#d4774a", "#e0875a"],
   },
   {
     title: "Diary App",
@@ -149,6 +149,6 @@ export const moreProjects: Project[] = [
         label: "Source",
       },
     ],
-    gradient: ["#8b5cf6", "#22d3ee"],
+    gradient: ["#c2410c", "#e0875a"],
   },
 ];
