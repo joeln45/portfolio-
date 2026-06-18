@@ -16,7 +16,7 @@ export default function Projects() {
           index="03"
           eyebrow="Projects"
           title="Selected work"
-          description="A mix of machine learning, full-stack, and systems projects — most rebuilt well beyond their original coursework, with tests and CI."
+          description="Machine learning, full-stack, and systems. Most rebuilt well beyond the brief, with tests and CI."
         />
 
         <Stagger className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">

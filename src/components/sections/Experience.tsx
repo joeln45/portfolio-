@@ -16,11 +16,11 @@ type Entry = {
 const timeline: Entry[] = [
   {
     period: "May 2025 – Jul 2025",
-    role: "IT Intern — Autonomous Robotics",
+    role: "IT Intern, Autonomous Robotics",
     org: "Lab of Future · UAE",
     kind: "work",
     points: [
-      "Contributed to the end-to-end build of an autonomous object-detection and sorting robot — camera calibration, colour detection, path planning, and robotic-arm integration.",
+      "Contributed to the end-to-end build of an autonomous object-detection and sorting robot: camera calibration, colour detection, path planning, and robotic-arm integration.",
       "Programmed and integrated the robotic arm, coordinating the vision, navigation, and mechanical subsystems.",
     ],
   },
@@ -34,13 +34,6 @@ const timeline: Entry[] = [
       "Coursework: Machine Learning, Distributed Systems, Web Services, Android, UX Design, Data Structures & Algorithms, Databases.",
       "Active Module Representative across multiple semesters.",
     ],
-  },
-  {
-    period: "2022",
-    role: "Higher Secondary Certificate (CBSE) — 80%",
-    org: "Global Indian School, Ajman · UAE",
-    kind: "education",
-    points: [],
   },
 ];
 

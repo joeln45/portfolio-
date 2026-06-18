@@ -12,8 +12,8 @@ export default function Contact() {
         <SectionHeading
           index="05"
           eyebrow="Contact"
-          title="Let's work together"
-          description="I'm open to machine learning, AI, fintech, and full-stack roles. Send a message, or reach out directly."
+          title="Let's build something."
+          description="Open to machine learning, AI, fintech, and full-stack roles. Say hello."
         />
 
         <div className="mt-14 grid gap-8 lg:grid-cols-2">

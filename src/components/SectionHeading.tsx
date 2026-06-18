@@ -16,7 +16,7 @@ export default function SectionHeading({
   return (
     <Reveal className="mx-auto max-w-2xl text-center">
       <p className="font-mono text-sm tracking-widest text-accent-soft">
-        <span className="text-muted">{index}</span> — {eyebrow}
+        <span className="text-muted">{index}</span> / {eyebrow}
       </p>
       <h2 className="mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">
         {title}

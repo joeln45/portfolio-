@@ -6,12 +6,12 @@ const groups = [
   {
     icon: Code,
     title: "Languages",
-    items: ["Python", "Java", "Kotlin", "JavaScript", "TypeScript", "SQL", "C", "OCaml"],
+    items: ["Python", "Java", "Kotlin", "JavaScript", "TypeScript", "SQL", "C"],
   },
   {
     icon: Brain,
     title: "ML & Data",
-    items: ["scikit-learn", "Hugging Face", "pandas", "TF-IDF", "NLP", "Power BI", "Orange"],
+    items: ["scikit-learn", "Hugging Face", "pandas", "TF-IDF", "NLP", "Power BI"],
   },
   {
     icon: Server,
@@ -45,8 +45,8 @@ export default function Skills() {
         <SectionHeading
           index="02"
           eyebrow="Skills"
-          title="My toolkit"
-          description="The languages, frameworks, and tools I reach for — grouped by where they fit."
+          title="The toolkit"
+          description="What I reach for, grouped by where it fits."
         />
 
         <Stagger className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

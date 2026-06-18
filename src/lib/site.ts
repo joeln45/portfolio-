@@ -6,7 +6,7 @@ export const site = {
   name: "Joel Nirmal Oommen",
   shortName: "Joel Nirmal",
   initials: "JN",
-  role: "Software Engineer — ML/AI & Full-Stack",
+  role: "ML / AI engineer · full-stack",
   location: "Ajman, UAE",
   // Update this to your real domain once Vercel is connected.
   url: "https://joel-nirmal.vercel.app",

@@ -36,7 +36,7 @@ export const featuredProjects: Project[] = [
     highlight:
       "TF-IDF + cosine-similarity search across the BBC News and UCI News Aggregator datasets, with Hugging Face Transformers for summarization.",
     tags: ["Python", "scikit-learn", "Hugging Face", "TF-IDF", "Streamlit"],
-    links: [{ type: "private", label: "Private — available on request" }],
+    links: [{ type: "private", label: "Private, available on request" }],
     gradient: ["#c2410c", "#e0875a"],
   },
   {
@@ -46,7 +46,7 @@ export const featuredProjects: Project[] = [
     blurb:
       "A data story on 11 years of Amazon's top-50 bestsellers, built on a reusable analysis toolkit with unit tests.",
     highlight:
-      "Finding: 73% of titles chart only once — staying power, not star rating, drives lasting success.",
+      "Finding: 73% of titles chart only once. Staying power, not star rating, drives lasting success.",
     tags: ["Python", "pandas", "Matplotlib", "pytest", "Jupyter"],
     links: [
       {
@@ -82,7 +82,7 @@ export const featuredProjects: Project[] = [
     blurb:
       "A centralised mutual-exclusion system in Java: a coordinator passes a single token to competing nodes over raw TCP, with priority scheduling and anti-starvation.",
     highlight:
-      "Crash-tolerant by hand — no brokers, no frameworks — with rolling logs, JUnit 5 tests, and CI.",
+      "Crash-tolerant by hand: no brokers, no frameworks. Rolling logs, JUnit 5 tests, and CI.",
     tags: ["Java", "TCP Sockets", "Multithreading", "JUnit 5", "Maven"],
     links: [
       {
@@ -124,7 +124,7 @@ export const moreProjects: Project[] = [
     category: "Game · Java",
     icon: Gamepad2,
     blurb:
-      "A 2D platformer with tight game-feel — coyote time, jump buffering, parallax, and custom audio filters — refactored from a 1,276-line god class into clean managers.",
+      "A 2D platformer with tight game-feel: coyote time, jump buffering, parallax, and custom audio filters. Refactored from a 1,276-line god class into clean managers.",
     tags: ["Java 17", "Swing/AWT", "Maven", "JUnit 5"],
     links: [
       {
@@ -140,7 +140,7 @@ export const moreProjects: Project[] = [
     category: "Android · Mobile",
     icon: Smartphone,
     blurb:
-      "An Android journal with mood, tags, photos, a calendar heatmap, and biometric lock — MVVM + Room, migrated off SharedPreferences, with unit/instrumented tests and CI.",
+      "An Android journal with mood, tags, photos, a calendar heatmap, and biometric lock. MVVM + Room, migrated off SharedPreferences, with unit and instrumented tests and CI.",
     tags: ["Kotlin", "Room", "MVVM", "Material 3", "Coroutines"],
     links: [
       {

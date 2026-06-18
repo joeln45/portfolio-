@@ -22,8 +22,8 @@ const item = {
 };
 
 const metrics = [
-  { value: "2026", label: "BSc (Hons) grad" },
-  { value: "6", label: "projects shipped" },
+  { value: "8+", label: "projects" },
+  { value: "7+", label: "languages" },
   { value: "2", label: "internships" },
 ];
 
@@ -82,11 +82,16 @@ export default function Hero() {
 
           <motion.p
             {...itemProps}
-            className="mt-6 max-w-xl text-lg leading-relaxed text-muted"
+            className="mt-6 max-w-xl text-xl leading-relaxed text-foreground"
           >
-            I build ML systems, NLP tools, and full-stack products that ship —
-            from semantic search and ML classifiers to production-grade APIs and
-            mobile apps.
+            Software that learns. Built to ship.
+          </motion.p>
+
+          <motion.p
+            {...itemProps}
+            className="mt-3 max-w-xl leading-relaxed text-muted"
+          >
+            Machine learning, NLP, and full-stack, from research to production.
           </motion.p>
 
           <motion.div

@@ -61,7 +61,7 @@ export default function ContactForm() {
         <CircleCheckBig className="text-accent-2" size={40} />
         <h3 className="mt-4 font-display text-xl font-semibold">Message sent</h3>
         <p className="mt-2 text-sm text-muted">
-          Thanks for reaching out — I&apos;ll get back to you soon.
+          Thanks for reaching out. I&apos;ll reply soon.
         </p>
         <button onClick={() => setStatus("idle")} className="btn-ghost mt-6">
           Send another
