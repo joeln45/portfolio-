@@ -40,6 +40,14 @@
   --color-on-accent: #16110d;
 }
 
+/* Ambient-light intensity for per-section glows (subtler in light mode) */
+:root {
+  --section-glow: 6%;
+}
+[data-theme="dark"] {
+  --section-glow: 11%;
+}
+
 /* ------------------------------------------------------------------ */
 /* Base                                                                */
 /* ------------------------------------------------------------------ */
@@ -212,6 +220,89 @@
   50% {
     transform: translate(24px, -28px) scale(1.08);
   }
+}
+
+/* Filmic grain — a single low-opacity texture over the whole page.    */
+/* Static (no animation), so reduced-motion is unaffected.             */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.055;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+[data-theme="dark"] .grain-overlay {
+  opacity: 0.09;
+}
+
+/* Per-section ambient light source — one soft warm radial, off-canvas */
+.glow-tr {
+  background-repeat: no-repeat;
+  background-image: radial-gradient(
+    55rem 55rem at 90% -15%,
+    color-mix(in oklab, var(--color-accent) var(--section-glow), transparent),
+    transparent 60%
+  );
+}
+.glow-bl {
+  background-repeat: no-repeat;
+  background-image: radial-gradient(
+    55rem 55rem at 10% 115%,
+    color-mix(in oklab, var(--color-accent) var(--section-glow), transparent),
+    transparent 60%
+  );
+}
+
+/* Edge-faded hairline dividers (replace hard section borders) */
+.fade-top,
+.fade-bottom {
+  position: relative;
+}
+.fade-top::before,
+.fade-bottom::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-border),
+    transparent
+  );
+}
+.fade-top::before {
+  top: 0;
+}
+.fade-bottom::after {
+  bottom: 0;
+}
+
+/* Card hover lift + cursor-following spotlight sheen */
+.card-lift {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease, border-color 0.4s ease;
+}
+.card-lift:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in oklab, var(--color-accent) 45%, var(--color-border));
+  box-shadow: 0 26px 60px -28px color-mix(in oklab, var(--color-foreground) 55%, transparent);
+}
+.card-sheen {
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(
+    220px circle at var(--mx, 50%) var(--my, 0%),
+    color-mix(in oklab, var(--color-accent) 16%, transparent),
+    transparent 60%
+  );
+}
+.group:hover .card-sheen {
+  opacity: 1;
 }
 
 /* ------------------------------------------------------------------ */

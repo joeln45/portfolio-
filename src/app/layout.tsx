@@ -94,6 +94,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <BackToTop />
+        <div className="grain-overlay" aria-hidden />
       </body>
     </html>
   );

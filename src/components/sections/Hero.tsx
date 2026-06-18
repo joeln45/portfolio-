@@ -3,6 +3,7 @@
 import { ArrowRight, Download, MapPin } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import Headshot from "@/components/Headshot";
+import Magnetic from "@/components/Magnetic";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
 import { site } from "@/lib/site";
 
@@ -92,10 +93,12 @@ export default function Hero() {
             {...itemProps}
             className="mt-8 flex flex-wrap items-center gap-4"
           >
-            <a href="#projects" className="btn-primary">
-              View projects
-              <ArrowRight size={18} />
-            </a>
+            <Magnetic>
+              <a href="#projects" className="btn-primary">
+                View projects
+                <ArrowRight size={18} />
+              </a>
+            </Magnetic>
             <a
               href={site.resume}
               className="btn-ghost"

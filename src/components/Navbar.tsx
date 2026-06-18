@@ -1,15 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { navLinks, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import ThemeToggle from "@/components/ThemeToggle";
+import Magnetic from "@/components/Magnetic";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
+  const reduce = useReducedMotion();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -55,28 +58,41 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <ul className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className={cn(
-                  "text-sm transition-colors hover:text-foreground",
-                  active === link.href.slice(1)
-                    ? "text-foreground"
-                    : "text-muted"
-                )}
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = active === link.href.slice(1);
+            return (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className={cn(
+                    "relative text-sm transition-colors hover:text-foreground",
+                    isActive ? "text-foreground" : "text-muted"
+                  )}
+                >
+                  {link.label}
+                  {isActive &&
+                    (reduce ? (
+                      <span className="absolute -bottom-1.5 left-0 right-0 h-px bg-accent" />
+                    ) : (
+                      <motion.span
+                        layoutId="nav-underline"
+                        className="absolute -bottom-1.5 left-0 right-0 h-px bg-accent"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    ))}
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="hidden items-center gap-3 md:flex">
           <ThemeToggle />
-          <a href="#contact" className="btn-primary !px-5 !py-2.5">
-            Get in touch
-          </a>
+          <Magnetic>
+            <a href="#contact" className="btn-primary !px-5 !py-2.5">
+              Get in touch
+            </a>
+          </Magnetic>
         </div>
 
         {/* Mobile controls */}

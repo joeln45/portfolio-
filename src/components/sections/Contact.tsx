@@ -7,7 +7,7 @@ import { site } from "@/lib/site";
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative scroll-mt-24 py-24 sm:py-32">
+    <section id="contact" className="relative scroll-mt-24 py-24 sm:py-32 glow-tr">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading
           index="05"

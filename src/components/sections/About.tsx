@@ -12,7 +12,7 @@ const stats = [
 
 export default function About() {
   return (
-    <section id="about" className="relative scroll-mt-24 py-24 sm:py-32">
+    <section id="about" className="relative scroll-mt-24 py-24 sm:py-32 glow-tr">
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:items-center">
           <Reveal>
