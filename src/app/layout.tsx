@@ -28,12 +28,12 @@ const mono = JetBrains_Mono({
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? site.url;
 
 const description =
-  "Recent BSc (Hons) Software Engineering graduate building across machine learning, NLP, and full-stack development — from semantic search and ML classifiers to production-grade APIs and mobile apps.";
+  "Joel Nirmal Oommen builds machine learning, NLP, and full-stack software, from semantic search and ML classifiers to production APIs and mobile apps.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${site.name} — Software Engineer (ML/AI & Full-Stack)`,
+    default: `${site.name} · ML / AI engineer`,
     template: `%s · ${site.shortName}`,
   },
   description,
@@ -56,13 +56,13 @@ export const metadata: Metadata = {
     type: "website",
     url: siteUrl,
     siteName: site.name,
-    title: `${site.name} — Software Engineer`,
+    title: `${site.name} · ML / AI engineer`,
     description,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — Software Engineer`,
+    title: `${site.name} · ML / AI engineer`,
     description,
   },
   robots: { index: true, follow: true },

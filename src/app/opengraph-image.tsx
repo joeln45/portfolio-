@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { site } from "@/lib/site";
 
-export const alt = `${site.name} — Software Engineer`;
+export const alt = `${site.name} · ML / AI engineer`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -52,8 +52,8 @@ export default function OgImage() {
             maxWidth: 920,
           }}
         >
-          Machine learning, NLP, and full-stack development — from semantic
-          search to production-grade APIs.
+          Machine learning, NLP, and full-stack, from semantic search to
+          production APIs.
         </div>
         <div style={{ display: "flex", marginTop: 44, fontSize: 24, color: "#e0875a" }}>
           github.com/joeln45
