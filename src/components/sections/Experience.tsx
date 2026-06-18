@@ -1,3 +1,6 @@
+"use client";
+
+import { motion, useReducedMotion } from "motion/react";
 import { Briefcase, GraduationCap } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
@@ -42,10 +45,12 @@ const timeline: Entry[] = [
 ];
 
 export default function Experience() {
+  const reduce = useReducedMotion();
+
   return (
     <section
       id="experience"
-      className="relative scroll-mt-24 border-t border-border bg-bg-soft py-24 sm:py-32"
+      className="relative scroll-mt-24 bg-bg-soft py-24 sm:py-32 glow-bl fade-top"
     >
       <div className="mx-auto max-w-4xl px-6">
         <SectionHeading
@@ -65,7 +70,18 @@ export default function Experience() {
                     <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-border bg-surface text-accent-soft">
                       <Icon size={18} />
                     </span>
-                    {!isLast && <span className="my-1 w-px flex-1 bg-border" />}
+                    {!isLast &&
+                      (reduce ? (
+                        <span className="my-1 w-px flex-1 bg-border" />
+                      ) : (
+                        <motion.span
+                          className="my-1 w-px flex-1 origin-top bg-border"
+                          initial={{ scaleY: 0 }}
+                          whileInView={{ scaleY: 1 }}
+                          viewport={{ once: true, margin: "0px 0px -60px 0px" }}
+                          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                        />
+                      ))}
                   </div>
                   <div className={isLast ? "pt-1" : "pb-10 pt-1"}>
                     <span className="font-mono text-xs tracking-wide text-accent-soft">

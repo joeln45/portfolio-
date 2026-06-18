@@ -1,6 +1,6 @@
 import { Brain, Code, Database, Server, Smartphone, Wrench } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
-import Reveal from "@/components/Reveal";
+import { Stagger, StaggerItem } from "@/components/Stagger";
 
 const groups = [
   {
@@ -39,7 +39,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="relative scroll-mt-24 border-y border-border bg-bg-soft py-24 sm:py-32"
+      className="relative scroll-mt-24 bg-bg-soft py-24 sm:py-32 glow-bl fade-top fade-bottom"
     >
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading
@@ -49,11 +49,11 @@ export default function Skills() {
           description="The languages, frameworks, and tools I reach for — grouped by where they fit."
         />
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {groups.map((group, i) => {
+        <Stagger className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {groups.map((group) => {
             const Icon = group.icon;
             return (
-              <Reveal key={group.title} delay={(i % 3) * 0.06}>
+              <StaggerItem key={group.title}>
                 <div className="group h-full rounded-2xl border border-border bg-surface p-6 transition-colors hover:border-accent/40">
                   <div className="flex items-center gap-3">
                     <span className="grid h-10 w-10 place-items-center rounded-xl border border-border bg-bg text-accent-soft transition-colors group-hover:text-accent-2">
@@ -74,10 +74,10 @@ export default function Skills() {
                     ))}
                   </ul>
                 </div>
-              </Reveal>
+              </StaggerItem>
             );
           })}
-        </div>
+        </Stagger>
       </div>
     </section>
   );
