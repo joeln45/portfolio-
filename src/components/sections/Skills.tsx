@@ -1,5 +1,6 @@
 import { Brain, Code, Database, Server, Smartphone, Wrench } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
+import SkillCard from "@/components/SkillCard";
 import { Stagger, StaggerItem } from "@/components/Stagger";
 
 const groups = [
@@ -54,26 +55,11 @@ export default function Skills() {
             const Icon = group.icon;
             return (
               <StaggerItem key={group.title}>
-                <div className="group h-full rounded-2xl border border-border bg-surface p-6 transition-colors hover:border-accent/40">
-                  <div className="flex items-center gap-3">
-                    <span className="grid h-10 w-10 place-items-center rounded-xl border border-border bg-bg text-accent-soft transition-colors group-hover:text-accent-2">
-                      <Icon size={20} />
-                    </span>
-                    <h3 className="font-display text-lg font-semibold">
-                      {group.title}
-                    </h3>
-                  </div>
-                  <ul className="mt-5 flex flex-wrap gap-2">
-                    {group.items.map((item) => (
-                      <li
-                        key={item}
-                        className="rounded-full border border-border bg-bg px-3 py-1 text-sm text-muted"
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <SkillCard
+                  icon={<Icon size={20} />}
+                  title={group.title}
+                  items={group.items}
+                />
               </StaggerItem>
             );
           })}
