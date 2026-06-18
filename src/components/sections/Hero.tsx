@@ -21,6 +21,16 @@ const item = {
   },
 };
 
+// Name reveals line-by-line: each line rises from behind a clipped edge.
+const nameGroup = { hidden: {}, show: {} };
+const nameLine = {
+  hidden: { y: "115%" },
+  show: (i: number) => ({
+    y: "0%",
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const, delay: i * 0.09 },
+  }),
+};
+
 const metrics = [
   { value: "8+", label: "projects" },
   { value: "7+", label: "languages" },
@@ -71,13 +81,26 @@ export default function Hero() {
           </motion.p>
 
           <motion.h1
-            {...itemProps}
+            {...(reduce ? {} : { variants: nameGroup })}
             className="mt-3 font-display text-5xl font-bold leading-[0.98] tracking-tight sm:text-6xl md:text-7xl"
           >
-            {firstLine}
-            <br />
-            {lastName}
-            <span className="text-accent">.</span>
+            <span className="block overflow-hidden py-[0.12em] -my-[0.12em]">
+              <motion.span
+                className="block"
+                {...(reduce ? {} : { custom: 0, variants: nameLine })}
+              >
+                {firstLine}
+              </motion.span>
+            </span>
+            <span className="block overflow-hidden py-[0.12em] -my-[0.12em]">
+              <motion.span
+                className="block"
+                {...(reduce ? {} : { custom: 1, variants: nameLine })}
+              >
+                {lastName}
+                <span className="text-accent">.</span>
+              </motion.span>
+            </span>
           </motion.h1>
 
           <motion.p
