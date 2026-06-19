@@ -48,11 +48,11 @@ export function ProjectCard({
     e.currentTarget.style.setProperty("--mx", `${e.clientX - rect.left}px`);
     e.currentTarget.style.setProperty("--my", `${e.clientY - rect.top}px`);
     if (reduce) return;
-    // Ghost icon drifts ~7px opposite the cursor for parallax depth.
+    // Ghost icon drifts ~2px opposite the cursor — barely-there parallax.
     const px = (e.clientX - rect.left) / rect.width - 0.5;
     const py = (e.clientY - rect.top) / rect.height - 0.5;
-    e.currentTarget.style.setProperty("--icon-x", `${-px * 14}px`);
-    e.currentTarget.style.setProperty("--icon-y", `${-py * 14}px`);
+    e.currentTarget.style.setProperty("--icon-x", `${-px * 4}px`);
+    e.currentTarget.style.setProperty("--icon-y", `${-py * 4}px`);
   }
 
   function handleLeave(e: MouseEvent<HTMLElement>) {
@@ -76,7 +76,7 @@ export function ProjectCard({
         <div aria-hidden className="dot-grid absolute inset-0 opacity-20" />
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 transition-transform duration-300 ease-out"
+          className="pointer-events-none absolute inset-0 transition-transform duration-200 ease-out"
           style={{ transform: "translate3d(var(--icon-x, 0px), var(--icon-y, 0px), 0)" }}
         >
           <Icon

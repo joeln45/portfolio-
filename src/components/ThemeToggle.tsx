@@ -33,17 +33,21 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-      className="icon-link h-10 w-10"
+      title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+      className="inline-flex items-center gap-2 rounded-full border border-border bg-bg-soft px-3.5 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:border-accent hover:text-accent"
     >
       {mounted ? (
         theme === "dark" ? (
-          <Sun size={18} />
+          <Sun size={16} />
         ) : (
-          <Moon size={18} />
+          <Moon size={16} />
         )
       ) : (
-        <span className="block h-[18px] w-[18px]" />
+        <span className="block h-4 w-4" />
       )}
+      <span className="hidden sm:inline">
+        {mounted ? (theme === "dark" ? "Light" : "Dark") : "Theme"}
+      </span>
     </button>
   );
 }

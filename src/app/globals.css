@@ -7,12 +7,12 @@
 /* Warm "paper & ink" palette + clay accent (inspired by breedlove.xyz)*/
 /* ------------------------------------------------------------------ */
 @theme {
-  --color-bg: #faf7f2;
-  --color-bg-soft: #f3ede2;
+  --color-bg: #f4eee2;
+  --color-bg-soft: #ebe1cf;
   --color-surface: #ffffff;
-  --color-border: #e6ddcd;
-  --color-foreground: #1a1613;
-  --color-muted: #5f564b;
+  --color-border: #d8c9af;
+  --color-foreground: #16120f;
+  --color-muted: #4e453a;
 
   --color-accent: #c2410c;
   --color-accent-soft: #c14e1f;
@@ -222,6 +222,129 @@
   }
 }
 
+/* Slow amber breathing + organic drift for the Skills glow. */
+@keyframes ember-breath {
+  0%,
+  100% {
+    opacity: 0.16;
+  }
+  50% {
+    opacity: 0.34;
+  }
+}
+/* Brighter inner layers ride a tighter range so they read without blowing out. */
+@keyframes ember-breath-bright {
+  0%,
+  100% {
+    opacity: 0.12;
+  }
+  50% {
+    opacity: 0.26;
+  }
+}
+/* Faint, faster flicker layered on the hot core for a live-ember feel. */
+@keyframes ember-flicker {
+  0%,
+  100% {
+    opacity: 0.18;
+  }
+  40% {
+    opacity: 0.34;
+  }
+  55% {
+    opacity: 0.24;
+  }
+  70% {
+    opacity: 0.4;
+  }
+}
+@keyframes ember-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(-3.5%, -3%, 0) scale(1.08);
+  }
+  66% {
+    transform: translate3d(3%, 2.5%, 0) scale(0.95);
+  }
+}
+.ember {
+  animation:
+    ember-breath 9s ease-in-out infinite,
+    ember-drift 19s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+.ember-2 {
+  animation:
+    ember-breath-bright 6.5s ease-in-out infinite 0.8s,
+    ember-drift 15s ease-in-out infinite 1.2s;
+  will-change: transform, opacity;
+}
+.ember-3 {
+  animation:
+    ember-flicker 4.5s ease-in-out infinite 0.4s,
+    ember-drift 12s ease-in-out infinite 2s;
+  will-change: transform, opacity;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ember,
+  .ember-2,
+  .ember-3 {
+    animation: none;
+    opacity: 0.2;
+  }
+}
+
+/* Unique flowing "routes" backdrop for Experience (the journey). The dashes
+   travel along each path; small station nodes pulse. */
+@keyframes route-flow {
+  to {
+    stroke-dashoffset: -240;
+  }
+}
+.route {
+  animation: route-flow 7s linear infinite;
+}
+.route-2 {
+  animation-duration: 11s;
+}
+.route-3 {
+  animation-duration: 9s;
+  animation-direction: reverse;
+}
+@keyframes route-pulse {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+.route-node {
+  animation: route-pulse 4s ease-in-out infinite;
+}
+.route-node-2 {
+  animation-duration: 5.5s;
+  animation-delay: 0.8s;
+}
+.route-node-3 {
+  animation-duration: 6.5s;
+  animation-delay: 1.6s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .route,
+  .route-2,
+  .route-3,
+  .route-node,
+  .route-node-2,
+  .route-node-3 {
+    animation: none;
+  }
+}
+
 /* Filmic grain — a single low-opacity texture over the whole page.    */
 /* Static (no animation), so reduced-motion is unaffected.             */
 .grain-overlay {
@@ -282,10 +405,24 @@
   bottom: 0;
 }
 
+/* Spotlight cursor coords — registered so they can ease, letting the
+   spotlight trail behind the cursor instead of snapping to it. */
+@property --mx {
+  syntax: "<length-percentage>";
+  inherits: true;
+  initial-value: 50%;
+}
+@property --my {
+  syntax: "<length-percentage>";
+  inherits: true;
+  initial-value: 0%;
+}
+
 /* Card hover lift + cursor-following spotlight sheen */
 .card-lift {
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.4s ease, border-color 0.4s ease;
+    box-shadow 0.4s ease, border-color 0.4s ease, --mx 0.5s ease-out,
+    --my 0.5s ease-out;
 }
 .card-lift:hover {
   transform: translateY(-6px);
@@ -296,13 +433,18 @@
   opacity: 0;
   transition: opacity 0.35s ease;
   background: radial-gradient(
-    220px circle at var(--mx, 50%) var(--my, 0%),
-    color-mix(in oklab, var(--color-accent) 16%, transparent),
+    200px circle at var(--mx, 50%) var(--my, 0%),
+    color-mix(in oklab, var(--color-accent) 11%, transparent),
     transparent 60%
   );
 }
 .group:hover .card-sheen {
   opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-lift {
+    transition-property: box-shadow, border-color;
+  }
 }
 
 /* ------------------------------------------------------------------ */

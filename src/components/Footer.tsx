@@ -16,7 +16,7 @@ export default function Footer() {
             </a>
             <p className="mt-3 text-sm text-muted">
               Software engineer working across machine learning, NLP, and
-              full-stack development. Based in {site.location}, open to relocation.
+              full-stack development. Based in {site.location}.
             </p>
           </div>
 
@@ -59,7 +59,9 @@ export default function Footer() {
                 <LinkedinIcon size={18} />
               </a>
               <a
-                href={`mailto:${site.email}`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${site.email}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Email"
                 className="icon-link"
               >

@@ -85,7 +85,78 @@ export default function Experience() {
       id="experience"
       className="relative scroll-mt-24 bg-bg-soft py-24 sm:py-32 glow-bl fade-top"
     >
-      <div className="mx-auto max-w-4xl px-6">
+      {/* Unique animated "routes" backdrop (the journey, in motion) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+        style={{
+          maskImage:
+            "linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent)",
+        }}
+      >
+        <svg
+          className="h-full w-full"
+          viewBox="0 0 1200 600"
+          preserveAspectRatio="xMidYMid slice"
+          fill="none"
+        >
+          {/* faint full routes */}
+          <g stroke="var(--color-accent)" strokeOpacity="0.1" strokeWidth="1">
+            <path d="M -40 470 C 220 380 380 520 620 410 S 980 250 1240 330" />
+            <path d="M -40 200 C 260 120 460 250 720 170 S 1040 340 1240 250" />
+            <path d="M -40 330 C 200 420 520 300 760 380 S 1060 470 1240 400" />
+          </g>
+          {/* travelling dashes */}
+          <g strokeWidth="1.5" strokeLinecap="round" strokeDasharray="2 18">
+            <path
+              className="route"
+              d="M -40 470 C 220 380 380 520 620 410 S 980 250 1240 330"
+              stroke="var(--color-accent)"
+              strokeOpacity="0.55"
+            />
+            <path
+              className="route route-2"
+              d="M -40 200 C 260 120 460 250 720 170 S 1040 340 1240 250"
+              stroke="var(--color-accent-2)"
+              strokeOpacity="0.5"
+            />
+            <path
+              className="route route-3"
+              d="M -40 330 C 200 420 520 300 760 380 S 1060 470 1240 400"
+              stroke="var(--color-accent)"
+              strokeOpacity="0.45"
+            />
+          </g>
+          {/* pulsing station nodes */}
+          <g>
+            <circle
+              className="route-node"
+              cx="620"
+              cy="410"
+              r="3.5"
+              fill="var(--color-accent)"
+            />
+            <circle
+              className="route-node route-node-2"
+              cx="720"
+              cy="170"
+              r="3.5"
+              fill="var(--color-accent-2)"
+            />
+            <circle
+              className="route-node route-node-3"
+              cx="760"
+              cy="380"
+              r="3.5"
+              fill="var(--color-accent)"
+            />
+          </g>
+        </svg>
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-4xl px-6">
         <SectionHeading
           index="04"
           eyebrow="Journey"

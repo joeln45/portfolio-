@@ -40,7 +40,7 @@ export default function Contact() {
                 <span>
                   <span className="block text-xs text-muted">Location</span>
                   <span className="text-sm">
-                    {site.location} · open to relocation
+                    {site.location}
                   </span>
                 </span>
               </div>
