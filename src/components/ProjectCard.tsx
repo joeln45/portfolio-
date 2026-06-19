@@ -9,7 +9,7 @@ import type { Project, ProjectLink } from "@/lib/projects";
 function ProjectLinkItem({ link }: { link: ProjectLink }) {
   if (link.type === "private") {
     return (
-      <span className="inline-flex items-center gap-1.5 text-xs text-muted">
+      <span className="inline-flex items-center gap-1.5 py-1 text-xs text-muted">
         <Lock size={13} />
         {link.label}
       </span>
@@ -21,7 +21,7 @@ function ProjectLinkItem({ link }: { link: ProjectLink }) {
       href={link.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-1.5 text-xs text-muted transition-colors hover:text-foreground"
+      className="inline-flex items-center gap-1.5 py-1 text-xs text-muted transition-colors hover:text-foreground"
     >
       {link.type === "github" ? (
         <GithubIcon size={14} />
