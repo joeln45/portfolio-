@@ -94,8 +94,19 @@ export default function ContactForm() {
     : { opacity: 0, scale: 0.98, y: 8 };
 
   return (
-    <AnimatePresence mode="wait" initial={false}>
-      {status === "success" ? (
+    <>
+      {/* Screen-reader announcements for the async status changes. */}
+      <p className="sr-only" role="status" aria-live="polite">
+        {status === "submitting"
+          ? "Sending your message"
+          : status === "success"
+            ? "Message sent. Thanks for reaching out."
+            : status === "error"
+              ? "Something went wrong. Please email me directly."
+              : ""}
+      </p>
+      <AnimatePresence mode="wait" initial={false}>
+        {status === "success" ? (
         <motion.div
           key="success"
           initial={panelInitial}
@@ -196,6 +207,7 @@ export default function ContactForm() {
           </button>
         </motion.form>
       )}
-    </AnimatePresence>
+      </AnimatePresence>
+    </>
   );
 }

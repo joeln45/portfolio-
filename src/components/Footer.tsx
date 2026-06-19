@@ -59,9 +59,7 @@ export default function Footer() {
                 <LinkedinIcon size={18} />
               </a>
               <a
-                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${site.email}`}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`mailto:${site.email}`}
                 aria-label="Email"
                 className="icon-link"
               >

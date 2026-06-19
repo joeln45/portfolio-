@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "motion/react";
 
 type Props = {
   value: number;
@@ -23,15 +24,14 @@ export default function CountUp({
   const ref = useRef<HTMLSpanElement>(null);
   const started = useRef(false);
   const [display, setDisplay] = useState(0);
+  const reduce = useReducedMotion();
 
   useEffect(() => {
+    // Reduced motion: render the final value directly, no animation, no
+    // synchronous state set inside the effect.
+    if (reduce) return;
     const el = ref.current;
     if (!el) return;
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setDisplay(value);
-      return;
-    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -55,12 +55,14 @@ export default function CountUp({
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [value, duration]);
+  }, [value, duration, reduce]);
+
+  const shown = reduce ? value : display;
 
   return (
     <span ref={ref} className={className}>
       {prefix}
-      {display.toFixed(decimals)}
+      {shown.toFixed(decimals)}
       {suffix}
     </span>
   );
