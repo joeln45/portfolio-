@@ -17,6 +17,9 @@ import { site } from "@/lib/site";
 
 const SPRING = { stiffness: 120, damping: 20, mass: 0.6 };
 
+// Soft fade so the shoulders melt into the stage instead of hard-cutting.
+const FIG_FADE = "linear-gradient(to bottom, #000 0%, #000 86%, transparent 100%)";
+
 /** A dark "portrait stage" split into depth layers that parallax on scroll
  *  (driven by the parent section's progress) and cursor. The crisp cutout is
  *  the star; everything behind/in-front frames it. Falls back to the original
@@ -62,7 +65,7 @@ export default function PortraitStage({
     <div
       onPointerMove={handleMove}
       onPointerLeave={reset}
-      className="relative mx-auto aspect-[4/5] w-full max-w-[26rem] overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl"
+      className="relative mx-auto aspect-square w-full max-w-[26rem] overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl"
       style={{ backgroundColor: "#0e0c0b" }}
     >
       {/* Back: warm-dark stage */}
@@ -75,7 +78,7 @@ export default function PortraitStage({
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(circle at 50% 26%, #2a211b, #0e0c0b 72%)",
+              "radial-gradient(circle at 50% 36%, #2a211b, #0e0c0b 72%)",
           }}
         />
       </motion.div>
@@ -102,18 +105,21 @@ export default function PortraitStage({
         style={reduce ? undefined : { x: figX, y: figY }}
         className="absolute inset-0"
       >
-        <Image
-          src={hasCutout ? "/headshot-cutout.png" : "/headshot.png"}
-          alt={site.name}
-          fill
-          sizes="(max-width: 1024px) 80vw, 420px"
-          className={
-            hasCutout
-              ? "object-contain object-bottom"
-              : "object-cover object-top"
-          }
-          onError={() => setHasCutout(false)}
-        />
+        <div
+          className="relative h-full w-full"
+          style={{ maskImage: FIG_FADE, WebkitMaskImage: FIG_FADE }}
+        >
+          {hasCutout ? (
+            <Image
+              src="/headshot-cutout.png?v=5"
+              alt={site.name}
+              fill
+              sizes="(max-width: 1024px) 80vw, 420px"
+              className="object-contain object-center"
+              onError={() => setHasCutout(false)}
+            />
+          ) : null}
+        </div>
       </motion.div>
 
       {/* Top: foreground accent flare */}

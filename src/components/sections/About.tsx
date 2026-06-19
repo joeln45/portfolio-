@@ -57,8 +57,14 @@ export default function About() {
             </Reveal>
 
             <Reveal>
+              <blockquote className="border-l-2 border-accent pl-6 font-display text-2xl font-semibold leading-snug tracking-tight text-foreground sm:text-3xl">
+                I turn ideas into{" "}
+                <span className="text-accent">software people actually use</span>.
+              </blockquote>
+            </Reveal>
+
+            <Reveal>
               <p className="text-lg leading-relaxed text-muted">
-                My best work lives where machine learning meets real engineering.
                 A JWT-secured Spring Boot order platform. A distributed
                 mutual-exclusion protocol written over raw TCP sockets. A data
                 story on what makes a bestseller last. I care about the
@@ -73,9 +79,9 @@ export default function About() {
                 <span className="text-foreground">
                   machine learning, AI, or fintech
                 </span>
-                , somewhere I can keep building end to end. Off the keyboard:
-                travel, basketball, football. Based in {site.location}, open to
-                relocation.
+                , somewhere I can keep building, start to finish. Off the
+                keyboard: basketball, football, and a travel list that keeps
+                growing. Based in {site.location}.
               </p>
             </Reveal>
           </div>
