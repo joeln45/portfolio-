@@ -2,9 +2,12 @@
 
 import { ArrowUp } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useReducedMotion } from "motion/react";
+import { scrollWindowTo } from "@/lib/utils";
 
 export default function BackToTop() {
   const [show, setShow] = useState(false);
+  const reduce = useReducedMotion();
 
   useEffect(() => {
     const onScroll = () => setShow(window.scrollY > 700);
@@ -18,7 +21,7 @@ export default function BackToTop() {
   return (
     <button
       type="button"
-      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      onClick={() => scrollWindowTo(0, !!reduce)}
       aria-label="Back to top"
       className="icon-link glass fixed bottom-6 right-6 z-50"
     >

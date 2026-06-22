@@ -4,9 +4,12 @@ import { useEffect, useState, type MouseEvent } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { navLinks, site } from "@/lib/site";
-import { cn } from "@/lib/utils";
+import { cn, scrollWindowTo } from "@/lib/utils";
 import ThemeToggle from "@/components/ThemeToggle";
 import Magnetic from "@/components/Magnetic";
+
+/** Matches scroll-padding-top: 5.5rem so links land below the fixed header. */
+const HEADER_OFFSET = 88;
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -49,20 +52,25 @@ export default function Navbar() {
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
-  // Smooth-scroll to a section ourselves (used by every nav link, desktop and
-  // mobile) so it works regardless of native anchor / scroll-container quirks.
+  // Scroll to a section ourselves (used by every nav link, desktop and mobile)
+  // via a rAF animation on instant steps, so it works regardless of native
+  // smooth-scroll / scroll-container quirks. See scrollWindowTo above.
   function handleNavClick(e: MouseEvent<HTMLAnchorElement>, href: string) {
     if (!href.startsWith("#")) return;
     e.preventDefault();
     setOpen(false);
     const id = href.slice(1);
-    const el = document.getElementById(id);
-    const behavior: ScrollBehavior = reduce ? "auto" : "smooth";
-    if (id === "top" || !el) {
-      window.scrollTo({ top: 0, behavior });
-    } else {
-      el.scrollIntoView({ behavior, block: "start" });
+    let targetY = 0;
+    if (id !== "top") {
+      const el = document.getElementById(id);
+      if (el) {
+        targetY = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+      } else {
+        history.pushState(null, "", href);
+        return;
+      }
     }
+    scrollWindowTo(targetY, !!reduce);
     history.pushState(null, "", href);
   }
 
