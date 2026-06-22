@@ -1,4 +1,4 @@
-# Joel Nirmal — Portfolio
+# Joel Nirmal - Portfolio
 
 A personal portfolio site for **Joel Nirmal Oommen**, a software engineer working across machine learning, NLP, and full-stack development.
 
