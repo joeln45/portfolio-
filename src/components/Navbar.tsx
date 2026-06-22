@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { navLinks, site } from "@/lib/site";
@@ -13,6 +13,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
   const reduce = useReducedMotion();
+  const pendingScroll = useRef<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -52,6 +53,27 @@ export default function Navbar() {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  // After the mobile menu closes (and its scroll lock is released in the
+  // cleanup above), scroll to the tapped section. Running this in an effect
+  // guarantees it happens after the lock is lifted, so the scroll isn't blocked.
+  useEffect(() => {
+    if (open) return;
+    const id = pendingScroll.current;
+    if (!id) return;
+    pendingScroll.current = null;
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    history.replaceState(null, "", `#${id}`);
+  }, [open, reduce]);
+
+  function handleNavClick(e: MouseEvent<HTMLAnchorElement>, href: string) {
+    if (!href.startsWith("#")) return;
+    e.preventDefault();
+    pendingScroll.current = href.slice(1);
+    setOpen(false);
+  }
 
   return (
     <header
@@ -144,7 +166,7 @@ export default function Navbar() {
                   <li key={link.href}>
                     <a
                       href={link.href}
-                      onClick={() => setOpen(false)}
+                      onClick={(e) => handleNavClick(e, link.href)}
                       aria-current={isActive ? "page" : undefined}
                       className={cn(
                         "block rounded-lg px-3 py-3 text-base transition-colors hover:bg-foreground/5 hover:text-foreground",
@@ -159,7 +181,7 @@ export default function Navbar() {
               <li className="pt-2">
                 <a
                   href="#contact"
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => handleNavClick(e, "#contact")}
                   className="btn-primary w-full"
                 >
                   Get in touch
