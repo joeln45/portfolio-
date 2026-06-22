@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { navLinks, site } from "@/lib/site";
@@ -13,7 +13,6 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
   const reduce = useReducedMotion();
-  const pendingScroll = useRef<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -40,39 +39,31 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
-  // When the mobile menu is open: lock body scroll and close on Escape.
+  // Close the mobile menu on Escape.
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
     document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
+    return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
-  // After the mobile menu closes (and its scroll lock is released in the
-  // cleanup above), scroll to the tapped section. Running this in an effect
-  // guarantees it happens after the lock is lifted, so the scroll isn't blocked.
-  useEffect(() => {
-    if (open) return;
-    const id = pendingScroll.current;
-    if (!id) return;
-    pendingScroll.current = null;
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-    history.replaceState(null, "", `#${id}`);
-  }, [open, reduce]);
-
+  // Smooth-scroll to a section ourselves (used by every nav link, desktop and
+  // mobile) so it works regardless of native anchor / scroll-container quirks.
   function handleNavClick(e: MouseEvent<HTMLAnchorElement>, href: string) {
     if (!href.startsWith("#")) return;
     e.preventDefault();
-    pendingScroll.current = href.slice(1);
     setOpen(false);
+    const id = href.slice(1);
+    const el = document.getElementById(id);
+    const behavior: ScrollBehavior = reduce ? "auto" : "smooth";
+    if (id === "top" || !el) {
+      window.scrollTo({ top: 0, behavior });
+    } else {
+      el.scrollIntoView({ behavior, block: "start" });
+    }
+    history.pushState(null, "", href);
   }
 
   return (
@@ -86,7 +77,7 @@ export default function Navbar() {
         <a
           href="#top"
           className="font-display text-lg font-bold tracking-tight"
-          onClick={() => setOpen(false)}
+          onClick={(e) => handleNavClick(e, "#top")}
         >
           {site.shortName}
           <span className="text-accent">.</span>
@@ -100,6 +91,7 @@ export default function Navbar() {
               <li key={link.href}>
                 <a
                   href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className={cn(
                     "relative text-sm transition-colors hover:text-foreground",
                     isActive ? "text-foreground" : "text-muted"
@@ -125,7 +117,11 @@ export default function Navbar() {
         <div className="hidden items-center gap-3 md:flex">
           <ThemeToggle />
           <Magnetic>
-            <a href="#contact" className="btn-primary !px-5 !py-2.5">
+            <a
+              href="#contact"
+              onClick={(e) => handleNavClick(e, "#contact")}
+              className="btn-primary !px-5 !py-2.5"
+            >
               Get in touch
             </a>
           </Magnetic>
